@@ -1,9 +1,9 @@
 import { Component, EventEmitter, OnInit, Output, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { forkJoin } from 'rxjs';
 import { reponseToProduct } from 'src/app/global/models/joyaGold.factory';
 import { IArchetype, IMaterial, IProduct } from 'src/app/global/models/joyaGold.model';
-import { AlertService } from 'src/app/global/service/alert.service';
 import { ApiService } from 'src/app/global/service/api.service';
 
 @Component({
@@ -17,6 +17,7 @@ export class ProductFormComponent  implements OnInit {
 
   private formBuilder = inject(FormBuilder);
   private apiService = inject(ApiService);
+  private modalService = inject(NgbModal);
 
   public loading: boolean = false;
   public submitted: boolean = false;
@@ -64,6 +65,7 @@ export class ProductFormComponent  implements OnInit {
       this.loading = false;
       this.submitted = false;
       this.resetForm();
+      this.closeModal();
       this.saved.emit(true);
     });
   }
@@ -72,6 +74,12 @@ export class ProductFormComponent  implements OnInit {
     this._productForm.reset();
     this._productForm.controls['materialId'].setValue("");
     this._productForm.controls['archetypeId'].setValue("");
+  }
+
+  private closeModal(){
+    if( this.modalService.hasOpenModals() ){
+      this.modalService.dismissAll();
+    }
   }
 
 }

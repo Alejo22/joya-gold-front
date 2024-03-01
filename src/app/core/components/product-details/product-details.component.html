@@ -14,7 +14,7 @@
     </div>
     <div class="col-sm-12 col-md-6 col-lg-6">
       <label class="title">Precio</label>
-      <p>{{ product.price}}</p>
+      <p>{{ product.price | currency:'$ ':'symbol':'4.0' }}</p>
     </div>
     <div class="col-sm-12 col-md-6 col-lg-6">
       <label class="title">Color</label>

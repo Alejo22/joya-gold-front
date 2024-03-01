@@ -2,8 +2,14 @@
     <div class="mb-3">
         <h1 class="text-center">Joya <span class="text-warning" >Gold</span></h1>
         <h4 class="text-center mb-5">Administrador de productos Joya Gold</h4>
-        <app-product-form (saved)="savedProduct($event)" />
     </div>
+
+    <div class="d-grid gap-2 col-3 mx-auto mb-5">
+      <button class="btn btn-primary" type="button" (click)="createProduct(content_product)" >
+        Crear nuevo producto
+      </button>
+    </div>
+    
     
     <table class="table table-striped">
         <thead>
@@ -22,14 +28,14 @@
             <td>{{ product.name }}</td>
             <td>{{ product.material.name }}</td>
             <td>{{ product.archetype.name }}</td>
-            <td>{{ product.price }}</td>
+            <td>{{ product.price | currency:'$ ':'symbol':'4.0' }}</td>
             <td class="text-center">
-                <button class="btn btn-success" (click)="detailsProduct(content, product)">
+                <button class="btn btn-success" (click)="detailsProduct(product, content)">
                     <i class="bi bi-eye"></i>
                 </button>
             </td>
             <td class="text-center">
-                <button class="btn btn-primary" (click)="editProduct(product)" >
+                <button class="btn btn-primary" (click)="editProduct(product, content_product)" >
                     <i class="bi bi-pencil-square"></i>
                 </button>
             </td>
@@ -43,14 +49,21 @@
       </table>
 </main>
 
-
-
 <ng-template #content let-modal>
 	<div class="modal-header">
 		<h4 class="modal-title" id="modal-basic-title">{{ selectedProduct?.name }}</h4>
-		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
 	</div>
 	<div class="modal-body">
     <app-product-details [product]="selectedProduct" *ngIf="selectedProduct" />
+	</div>
+</ng-template>
+
+<ng-template #content_product let-modal_product>
+	<div class="modal-header">
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal_product.dismiss()"></button>
+	</div>
+	<div class="modal-body">
+        <app-product-form (saved)="savedProduct($event)" />
 	</div>
 </ng-template>

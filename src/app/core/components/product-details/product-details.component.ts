@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { IProduct } from 'src/app/global/models/joyaGold.model';
 
 @Component({
@@ -7,8 +7,6 @@ import { IProduct } from 'src/app/global/models/joyaGold.model';
   styleUrls: ['./product-details.component.scss']
 })
 export class ProductDetailsComponent {
-
   @Input("product")
   product!: IProduct;
-
 }

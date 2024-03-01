@@ -33,12 +33,16 @@ export class ProductListComponent  implements OnInit {
     }
   }
 
-  public detailsProduct(content: TemplateRef<any>, product:IProduct){
+  public detailsProduct(product:IProduct, content: TemplateRef<any>){
     this.selectedProduct = product;
     this.openModal(content);
   }
 
-  public editProduct(product:IProduct){
+  public createProduct(content: TemplateRef<any>){
+    this.openModal(content);
+  }
+
+  public editProduct(product:IProduct, content: TemplateRef<any>){
     this.alertService.createAlert("Información", "Método en implementación", false, ICON_SWAL.WARNING);
   }
 
