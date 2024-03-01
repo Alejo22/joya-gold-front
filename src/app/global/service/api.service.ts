@@ -11,12 +11,12 @@ export class ApiService {
 
   private http = inject(HttpClient);
 
-  public getMaterials():Observable<IMaterial>{
-    return  this.http.get<IMaterial>(`${ URLS.BASE }/${URLS.MATERIAL}`);
+  public getMaterials():Observable<IMaterial[]>{
+    return  this.http.get<IMaterial[]>(`${ URLS.BASE }/${URLS.MATERIAL}`);
   }
 
-  public getArchetypes():Observable<IArchetype>{
-    return  this.http.get<IArchetype>(`${ URLS.BASE }/${URLS.ARCHETYPE}`);
+  public getArchetypes():Observable<IArchetype[]>{
+    return  this.http.get<IArchetype[]>(`${ URLS.BASE }/${URLS.ARCHETYPE}`);
   }
 
   /* products */
