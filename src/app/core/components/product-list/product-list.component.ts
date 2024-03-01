@@ -17,13 +17,15 @@ export class ProductListComponent  implements OnInit {
   /* Variables */
   productList:IProduct[] = [];
 
+  selectedProduct:IProduct | undefined;
+
 
   ngOnInit(): void {
     this.reloadProductList();
   }
 
   public detailsProduct(product:IProduct){
-    console.log("detailsProduct");
+    this.selectedProduct = product;
   }
 
   public editProduct(product:IProduct){
