@@ -24,7 +24,7 @@
             <td>{{ product.archetype.name }}</td>
             <td>{{ product.price }}</td>
             <td class="text-center">
-                <button class="btn btn-success" (click)="detailsProduct(product)">
+                <button class="btn btn-success" (click)="detailsProduct(content, product)">
                     <i class="bi bi-eye"></i>
                 </button>
             </td>
@@ -43,4 +43,14 @@
       </table>
 </main>
 
-<app-product-details [product]="selectedProduct" *ngIf="selectedProduct" />
+
+
+<ng-template #content let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">{{ selectedProduct?.name }}</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+    <app-product-details [product]="selectedProduct" *ngIf="selectedProduct" />
+	</div>
+</ng-template>
