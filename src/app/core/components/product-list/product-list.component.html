@@ -1,0 +1,44 @@
+<main class="container mt-4">
+    <div class="text-center mb-3">
+        <h1>Joya <span class="text-warning" >Gold</span></h1>
+        <h4 class="mb-5">Administrador de productos Joya Gold</h4>
+        <button type="button" class="btn btn-primary">Crear producto</button>
+    </div>
+    
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Material</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Precio</th>
+            <th scope="col" class="text-center">Ver</th>
+            <th scope="col" class="text-center">Editar</th>
+            <th scope="col" class="text-center">Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of productList">
+            <td>{{ product.name }}</td>
+            <td>{{ product.material.name }}</td>
+            <td>{{ product.archetype.name }}</td>
+            <td>{{ product.price }}</td>
+            <td class="text-center">
+                <button class="btn btn-success" (click)="detailsProduct(product)">
+                    <i class="bi bi-eye"></i>
+                </button>
+            </td>
+            <td class="text-center">
+                <button class="btn btn-primary" (click)="editProduct(product)" >
+                    <i class="bi bi-pencil-square"></i>
+                </button>
+            </td>
+            <td class="text-center">
+                <button class="btn btn-danger" (click)="deleteProduct(product)">
+                    <i class="bi bi-trash3"></i>
+                </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+</main>

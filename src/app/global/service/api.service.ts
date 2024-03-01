@@ -24,4 +24,8 @@ export class ApiService {
   public getProducts():Observable<any>{
     return this.http.get<any>(`${ URLS.BASE }/${URLS.PRODUCT}`);
   }
+
+  public deleteProducts(productId:number):Observable<any>{
+    return this.http.delete<any>(`${ URLS.BASE }/${URLS.PRODUCT}/${productId}`);
+  }
 }
