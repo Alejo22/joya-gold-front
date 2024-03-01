@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IArchetype, IMaterial } from '../models/joyaGold.model';
+import { IArchetype, IMaterial, IProduct } from '../models/joyaGold.model';
 import { URLS } from 'src/environments/environment';
 
 @Injectable({
@@ -21,8 +21,18 @@ export class ApiService {
 
   /* products */
 
-  public getProducts():Observable<any>{
-    return this.http.get<any>(`${ URLS.BASE }/${URLS.PRODUCT}`);
+  public getProducts():Observable<any[]>{
+    return this.http.get<any[]>(`${ URLS.BASE }/${URLS.PRODUCT}`);
+  }
+
+  public saveProduct(product:IProduct):Observable<any>{
+
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json;',
+      'Access-Control-Allow-Origin': '*',
+    })
+
+    return this.http.post(`${ URLS.BASE }/${URLS.PRODUCT}`,JSON.stringify(product) , { headers });
   }
 
   public deleteProducts(productId:number):Observable<any>{

@@ -1,8 +1,8 @@
 <main class="container mt-4">
-    <div class="text-center mb-3">
-        <h1>Joya <span class="text-warning" >Gold</span></h1>
-        <h4 class="mb-5">Administrador de productos Joya Gold</h4>
-        <button type="button" class="btn btn-primary">Crear producto</button>
+    <div class="mb-3">
+        <h1 class="text-center">Joya <span class="text-warning" >Gold</span></h1>
+        <h4 class="text-center mb-5">Administrador de productos Joya Gold</h4>
+        <app-product-form (saved)="savedProduct($event)" />
     </div>
     
     <table class="table table-striped">
@@ -54,5 +54,3 @@
     <app-product-details [product]="selectedProduct" *ngIf="selectedProduct" />
 	</div>
 </ng-template>
-
-<app-product-form />

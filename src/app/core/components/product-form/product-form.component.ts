@@ -1,7 +1,9 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { forkJoin } from 'rxjs';
-import { IArchetype, IMaterial } from 'src/app/global/models/joyaGold.model';
+import { reponseToProduct } from 'src/app/global/models/joyaGold.factory';
+import { IArchetype, IMaterial, IProduct } from 'src/app/global/models/joyaGold.model';
+import { AlertService } from 'src/app/global/service/alert.service';
 import { ApiService } from 'src/app/global/service/api.service';
 
 @Component({
@@ -10,6 +12,8 @@ import { ApiService } from 'src/app/global/service/api.service';
   styleUrls: ['./product-form.component.scss']
 })
 export class ProductFormComponent  implements OnInit {
+
+  @Output('saved') saved: EventEmitter<boolean> = new EventEmitter();
 
   private formBuilder = inject(FormBuilder);
   private apiService = inject(ApiService);
@@ -48,13 +52,26 @@ export class ProductFormComponent  implements OnInit {
 
   onSubmitForm(){
     this.submitted = true;
-
-    console.log( this._productForm.getRawValue());
-
+    
     if(!this._productForm.valid){
       return
     }
 
+    this.loading = true;
+    let product:IProduct = reponseToProduct( this._productForm.getRawValue());
+
+    this.apiService.saveProduct( product).subscribe( () => {
+      this.loading = false;
+      this.submitted = false;
+      this.resetForm();
+      this.saved.emit(true);
+    });
+  }
+
+  private resetForm(){
+    this._productForm.reset();
+    this._productForm.controls['materialId'].setValue("");
+    this._productForm.controls['archetypeId'].setValue("");
   }
 
 }

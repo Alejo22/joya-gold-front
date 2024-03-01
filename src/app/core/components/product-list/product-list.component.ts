@@ -26,13 +26,20 @@ export class ProductListComponent  implements OnInit {
     this.reloadProductList();
   }
 
+  public savedProduct(event:any){
+    if(event){
+      this.alertService.createAlert("Información", "Se ha creado el producto correctamente", false, ICON_SWAL.SUCCESS);
+      this.reloadProductList();
+    }
+  }
+
   public detailsProduct(content: TemplateRef<any>, product:IProduct){
     this.selectedProduct = product;
     this.openModal(content);
   }
 
   public editProduct(product:IProduct){
-    console.log("editProduct");
+    this.alertService.createAlert("Información", "Método en implementación", false, ICON_SWAL.WARNING);
   }
 
   public deleteProduct(product:IProduct){
@@ -47,8 +54,8 @@ export class ProductListComponent  implements OnInit {
   }
 
   private reloadProductList(){
-    this.apiSerivice.getProducts().subscribe( response => {
-      this.productList = response;
+    this.apiSerivice.getProducts().subscribe( productList => {
+      this.productList = productList.sort( (a , b) => a.name.localeCompare(b.name) );
     })
   }
 

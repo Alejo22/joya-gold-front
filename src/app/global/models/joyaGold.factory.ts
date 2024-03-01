@@ -12,7 +12,9 @@ export const reponseToProduct = (response:any) => {
         weight: response['weight'],
         price: response['price'],
         color: response['color'],
+        materialId: response['materialId'] || 0,
         material: material,
+        archetypeId: response['archetypeId'] || 0,
         archetype: archetype,
     }
 
